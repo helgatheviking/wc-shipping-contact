@@ -103,7 +103,7 @@ function add_recipient( $email, $order ) {
 
 	$additional_email = $order->get_meta( '_shipping_email', true );
 
-	if( $additional_email && is_email( $additional_email )){
+	if ( $additional_email && is_email( $additional_email )) {
 		$email = explode( ',', $email );
 		array_push( $email, $additional_email );
 		$email = implode(",", $email);
@@ -117,17 +117,17 @@ function add_recipient( $email, $order ) {
  * @param WC_Order $order
  */
 
-function after_customer_details( $order ){
+function after_customer_details( $order ) {
 	
 	$email = $order->get_meta( '_shipping_email', true );
 	
-	if( $email ){
+	if ( $email ) {
 		echo '<dt>' . esc_html__( 'Shipping Email', 'wc-shipping-contact' ) . ':</dt><dd>' . $email . '</dd>';
 	}
 
 	$phone = $order->get_meta( '_shipping_phone', true );
 	
-	if( $phone ){
+	if ( $phone ) {
 		echo '<dt>' . esc_html__( 'Shipping Phone', 'wc-shipping-contact' ) . ':</dt><dd>' . $phone . '</dd>';
 	}
 
@@ -141,24 +141,28 @@ function after_customer_details( $order ){
  * @param bool $plain_text
  */
 
-function email_after_customer_details( $order, $sent_to_admin = false, $plain_text = false ){
+function email_after_customer_details( $order, $sent_to_admin = false, $plain_text = false ) {
 	$email = $order->get_meta( '_shipping_email', true );
 	$phone = $order->get_meta( '_shipping_phone', true );
 
-	// Translators: %1$s the data label ie "Shipping Email" %12s is the value ie, "555-555-1234"
-	$plain_text_string = esc_html__( '%1$s: %12s', 'wc-shipping-contact' );
+	if ( $plain_text ) { 
 
-	// Translators: %1$s the data label ie "Shipping Email" %12s is the value ie, "555-555-1234"
-	$html_text_string = esc_html__( '<strong>%1$s:</strong> %12s', 'wc-shipping-contact' );
+		if ( $email ) {
+			echo esc_html__ ( 'Shipping Email', 'wc-shipping-contact' ) . ': ' . wp_kses_post( $email ) . "\n";
+		}
+	
+		if ( $phone ) {
+			echo esc_html__ ( 'Shipping Email', 'wc-shipping-contact' ) . ': ' . wp_kses_post( $phone ) . "\n";
+		}
 
-	$text_string = $plain_text ? $plain_text_string : $html_text_string;
-
-	if ( $email ) {
-		printf( $text_string, esc_html__( 'Shipping Email', 'wc-shipping-contact' ), $email );
-	}
-
-	if ( $phone ) {
-		printf( $text_string, esc_html__( 'Shipping Phone', 'wc-shipping-contact' ), $email );
+	} else {
+		if ( $email ) {
+			echo '<p><strong>' . esc_html__ ( 'Shipping Email', 'wc-shipping-contact' ) . ':<strong>' . wp_kses_post( $email ) . '</p>';
+		}
+	
+		if ( $phone ) {
+			echo '<p><strong>' . esc_html__ ( 'Shipping Phone', 'wc-shipping-contact' ) . ':<strong>' . wp_kses_post( $phone ) . '</p>';
+		}
 	}
 
 }
