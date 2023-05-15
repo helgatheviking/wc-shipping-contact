@@ -3,14 +3,14 @@
  * Plugin Name: Shipping Contact for WooCommerce
  * Plugin URI: https://gist.github.com/helgatheviking/c3381322bade0227d762ba1cf429271e
  * Description: Add a shipping email field to checkout and notify of new orders
- * Version: 1.1.0
+ * Version: 1.1.1
  * Author: Kathy Darling
  * Author URI: http://kathyisawesome.com
  * Requires at least: 4.0
- * Tested up to: 4.8
+ * Tested up to: 6.2.0
  *
  * WC requires at least: 3.5.0
- * WC tested up to: 4.5
+ * WC tested up to: 7.7.0
  *
  * Text Domain: wc-shipping-contact
  * Domain Path: /languages/
